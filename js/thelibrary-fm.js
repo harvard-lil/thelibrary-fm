@@ -49,7 +49,7 @@ $(function(){
 						// Set the background. local file names are based on soundcloud permalink names
 						$('html').css({'background': 'url(img/' + track.permalink + '.jpg) no-repeat center fixed', 'background-size': 'cover'});
 					},
-					onresume: function() {						
+					onresume: function() {
 						$('.player').addClass('playing');
 					},
 					
@@ -80,7 +80,7 @@ $(function(){
 					
 			if (playing) {			
 				// If it is playing: pause it.
-				soundManager.pause('track_' + data.id);				
+				soundManager.pause('track_' + data.id);
 			} else {
 				
 				// If it's not playing: stop all other sounds that might be playing and play the clicked sound.
@@ -96,6 +96,14 @@ $(function(){
 		
 		// Bind a click event to the play / pause button.
 		$('.play, .pause').live('click', function(){
+			togglePlay();
+		});
+		
+		// Player Functions
+
+		// **Play/Pause**
+		
+		var togglePlay = function(){
 			if ( $('li').hasClass('active') == true ) {
 				// If a track is active, play or pause it depending on current state.
 				soundManager.togglePause( 'track_' + $('li.active').data('track').id );	
@@ -103,9 +111,7 @@ $(function(){
 				// If no tracks are active, just play the first one.
 				$('li:first').click();
 			}
-		});
-		
-		// Player Functions
+		}
 		
 		// **Next Track**
 		var nextTrack = function(){
@@ -119,5 +125,33 @@ $(function(){
 				$('.tracks li:first').click();
 			}
 		}
+		
+		// **Prev Track**
+		var prevTrack = function(){
+			// Stop all sounds
+			soundManager.stopAll();
+			
+			// Click the next list item after the current active one. 
+			// If it does not exist *(there is no next track)*, click the first list item.
+
+			if ( $('li.active').prev().click().length == 0 ) {
+				$('.tracks li:last').click();
+			}
+		}
+		
+		$(document).bind('keydown',function(e){
+            if (e.which==13 || e.which==27 || e.which==32 || e.which==37 || e.which==38 || e.which==39 || e.which==40) {
+                e.preventDefault();
+                if (e.which==37 || e.which==38) {
+                    prevTrack();
+                }
+                if (e.which==39 || e.which==40) {
+                    nextTrack();
+                }
+                if (e.which==32 || e.which==13 || e.which==27) {
+                    togglePlay();
+                }
+            }
+        });
 	});
 });

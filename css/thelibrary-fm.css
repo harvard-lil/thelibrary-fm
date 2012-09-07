@@ -1,5 +1,49 @@
+#page-wrap {
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #7B7B7B;
+    opacity:0.9;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+    -moz-box-shadow: 2px black;
+    -webkit-box-shadow: 20px black;
+    box-shadow: 20px black;
+    float: left;
+    margin: 30px;
+}
+
+#bg {
+	position:fixed; 
+	top:-50%; 
+	left:-50%; 
+	width:200%; 
+	height:200%;
+}
+
+#bg img {
+	position:absolute; 
+	top:0; 
+	left:0; 
+	right:0; 
+	bottom:0; 
+	margin:auto; 
+	min-width:50%;
+	min-height:50%;
+}
+
+.player {
+	font-family: helvetica, sans-serif;
+	font-weight: bold;
+	color: black;
+	padding:10px 10px 5px;
+}
+
 .play {
     display: block;
+    cursor:pointer;
+    color:#ff0;
 }
 
 .pause {
@@ -12,4 +56,14 @@
 
 .playing .pause {
     display: block;
+    cursor:pointer;
+    color:#ff0;
+}
+
+li {
+	cursor:pointer;
+}
+
+li.active {
+	color:#09f;
 }
