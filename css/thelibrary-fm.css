@@ -1,17 +1,19 @@
+html {
+    background: #abc6db;
+}
+
 #page-wrap {
+	display:none;
     position: relative;
     z-index: 2;
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #7B7B7B;
+    background: #abc6db;
     opacity:0.9;
-    filter:alpha(opacity=40); /* For IE8 and earlier */
+    filter:alpha(opacity=90); /* For IE8 and earlier */
     -moz-box-shadow: 2px black;
     -webkit-box-shadow: 20px black;
     box-shadow: 20px black;
     float: left;
-    margin: 30px;
+    margin: 30px; 
 }
 
 #bg {
@@ -34,9 +36,9 @@
 }
 
 .player {
-	font-family: helvetica, sans-serif;
-	font-weight: bold;
-	color: black;
+	/*font-family: helvetica, sans-serif;*/
+	font-family: 'ProximaNovaLight', 'Open Sans', sans-serif;
+	color: 2a2a2a;
 	padding:10px 10px 5px;
 }
 
@@ -60,10 +62,15 @@
     color:#ff0;
 }
 
+ol {
+    list-style: none;
+}
+
 li {
 	cursor:pointer;
+	margin: 10px 15px 0 -35px;
 }
 
 li.active {
-	color:#09f;
+	color:#287cf9;
 }

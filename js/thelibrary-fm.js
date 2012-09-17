@@ -9,6 +9,9 @@ soundManager.useFastPolling = true;
 
 $(function(){
 
+    // Load the control box slowly
+    $('#page-wrap').fadeIn(1000);
+
 	// Wait for SoundManager2 to load properly
 	soundManager.onready(function() {
 		
@@ -22,7 +25,7 @@ $(function(){
 			// Loop through each of the tracks
 			$.each(playlist.tracks, function(index, track) {
 
-				// Create a list item for each track and associate the track *data* with it.				
+				// Create a list item for each track and associate the track *data* with it.
 				$('<li>' + track.title + '</li>').data('track', track).appendTo('.tracks');
 
 				// * Get appropriate stream url depending on whether the playlist is private or public.
@@ -47,10 +50,21 @@ $(function(){
 						$('.player').addClass('playing');
 						
 						// Set the background. local file names are based on soundcloud permalink names
-						$('html').css({'background': 'url(img/' + track.permalink + '.jpg) no-repeat center fixed', 'background-size': 'cover'});
+						//$('html').css({'background': 'url(img/' + track.permalink + '.jpg) no-repeat center fixed', 'background-size': 'cover'});
+
+//						$('#cover-image').attr("src", "img/" + track.permalink + ".jpg");
+						
+//						e.preventDefault();
+                        $imgURL = "img/" + track.permalink + ".jpg";
+                        $("#cover-image")
+                            .fadeOut(200, function() {
+                                $("#cover-image").attr('src',$imgURL);
+                            })
+                            .fadeIn(200);
+						
 					},
 					onresume: function() {
-						$('.player').addClass('playing');
+						$('#player').addClass('playing');
 					},
 					
 					// On pause, remove the *playing* class from the main player div.
@@ -95,9 +109,9 @@ $(function(){
 		});
 		
 		// Bind a click event to the play / pause button.
-		$('.play, .pause').live('click', function(){
-			togglePlay();
-		});
+		//$('.play, .pause').live('click', function(){
+		//	togglePlay();
+		//});
 		
 		// Player Functions
 
@@ -154,4 +168,5 @@ $(function(){
             }
         });
 	});
+	
 });
