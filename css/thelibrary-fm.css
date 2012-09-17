@@ -34,7 +34,6 @@ html {
 	min-width:50%;
 	min-height:50%;
 }
-
 .player {
 	font-family: 'ProximaNovaLight', 'Open Sans', sans-serif;
 	font-size:1.1em;
@@ -62,7 +61,7 @@ html {
 
 ol {
     list-style: none;
-    padding: 1px 15px 1px 15px;
+    padding: 0 15px 0 15px;
 }
 
 li {
