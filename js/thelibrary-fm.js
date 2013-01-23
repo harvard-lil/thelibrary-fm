@@ -78,9 +78,28 @@ $(function(){
 					}	
 				});	
 			});
-			
+
 			// Start the player with the first track
 			$('li:first').click();
+			
+			// Get our URLs.We're looking to see if we have a playonload=false param
+			var urlParams = {};
+            (function () {
+                var match,
+                    pl     = /\+/g,  // Regex for replacing addition symbol with a space
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                    query  = window.location.search.substring(1);
+
+                while (match = search.exec(query))
+                   urlParams[decode(match[1])] = decode(match[2]);
+            })();
+
+            // if we do have a playonload=false param, pause the playing
+            // TODO: clean up this kludge. we should not play at all if playonload=false
+            if (Object.prototype.hasOwnProperty.call(urlParams, 'playonload') && urlParams.playonload == 'false'){
+                soundManager.togglePause( 'track_' + $('li.active').data('track').id );	
+            } 
 		});
 
 		// DOM Actions
@@ -152,8 +171,9 @@ $(function(){
 				$('.tracks li:last').click();
 			}
 		}
+        
 		
-		$(document).bind('keydown',function(e){
+		$(document).bind('keydown',function(e) {
             if (e.which==13 || e.which==27 || e.which==32 || e.which==37 || e.which==38 || e.which==39 || e.which==40) {
                 e.preventDefault();
                 if (e.which==37 || e.which==38) {
